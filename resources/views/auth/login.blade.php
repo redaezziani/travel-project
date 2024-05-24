@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full h-screen overflow-hidden flex justify-center items-center gap-2">
+    <div class="w-full h-screen bg-white dark:bg-neutral-800 overflow-hidden flex justify-center items-center gap-2">
         <div class=" w-1/2 h-full hidden md:block overflow-hidden">
             <img class="w-full h-full object-cover object-center" src="https://images.squarespace-cdn.com/content/v1/5a4188e76f4ca304bb0e99ab/1535526129045-1Q60VGQ758034BTGNFIX/morocco-sahara-desert-sand-dunes-3.jpg" alt="" srcset="">
         </div>
@@ -25,12 +25,14 @@
                     fill the form to log in to your account
             </div>
 
-            <x-validation-errors class="mb-4" />
+           <div class="  md:w-[30rem] mt-5 w-full justify-start items-start">
+           <x-validation-errors class="mb-4 bg-red-500/5 border border-red-400 rounded-lg p-2" />
             @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
                 {{ session('status') }}
             </div>
             @endif
+           </div>
 
             <form class="md:w-[30rem] mt-9 w-full" method="POST" action="{{ route('login') }}">
                 @csrf
@@ -53,7 +55,7 @@
                 </div>
 
                 <div class="flex flex-col gap-2 items-center justify-end mt-4">
-                    <x-button class=" mt-4 px-3 flex justify-center items-center py-2.5 bg-primary-500 hover:bg-blue-400 w-full">
+                    <x-button class=" mt-4 px-3 flex justify-center items-center py-2.5 !bg-primary-500 !hover:bg-blue-400 w-full">
                         {{ __('Log in') }}
                     </x-button>
                     <div class="w-full">
