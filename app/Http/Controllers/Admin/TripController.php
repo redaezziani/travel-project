@@ -19,6 +19,15 @@ class TripController extends Controller
         return view('admin.trips.create');
     }
 
+    public function show(Trip $trip)
+    {
+        // get all the comments for the trip and count of likes and dislikes with pagination for the comments
+        $trip->comments = $trip->comments()->with('user')->latest()->paginate(5);
+        $trip->likes = $trip->likes()->with('user')->latest()->paginate(5);
+        $trip->likes_count = $trip->likes->where('like', 1)->count(); 
+        return view('admin.trips.show', compact('trip'));
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DestinationImageController;
 use App\Http\Controllers\Admin\LikeController;
 use App\Http\Controllers\Admin\TripController;
+use App\Http\Controllers\Users\ControllersCommentUsers;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,6 +44,8 @@ Route::prefix('dashboard/admin/bookings')->name('admin.bookings.')->group(functi
 Route::prefix('dashboard/admin/comments')->name('admin.comments.')->group(function () {
     Route::get('/', [CommentController::class, 'index'])->name('index');
     Route::get('/{comment}', [CommentController::class, 'show'])->name('show');
+    Route::post('/comments', [ControllersCommentUsers::class, 'store'])->name('store');
+    Route::delete('/comments/{comment}', [ControllersCommentUsers::class, 'destroy'])->name('remove');
     Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('destroy');
 });
 
@@ -59,3 +62,5 @@ Route::prefix('dashboard/admin/destination-images')->name('admin.destination-ima
     Route::put('/{destinationImage}', [DestinationImageController::class, 'update'])->name('update');
     Route::delete('/{destinationImage}', [DestinationImageController::class, 'destroy'])->name('destroy');
 });
+
+
