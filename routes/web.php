@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DestinationImageController;
 use App\Http\Controllers\Admin\LikeController;
 use App\Http\Controllers\Admin\TripController;
+use App\Http\Controllers\Admin\Adminpanel;
+use App\Http\Controllers\Adminpanel as ControllersAdminpanel;
 use App\Http\Controllers\Users\ControllersCommentUsers;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,10 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+
+Route::get('dashboard/admin', [ControllersAdminpanel::class, 'index'])->name('admin.index');
 
 
 Route::prefix('dashboard/admin/trips')->name('admin.trips.')->group(function () {

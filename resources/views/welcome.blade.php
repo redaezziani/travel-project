@@ -4,19 +4,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @livewireStyles
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
     <title>
-    Atlas Escapes 
+        Atlas Escapes home page
     </title>
 </head>
 
-<body
-class=" flex min-h-screen w-full overflow-x-hidden relative justify-start items-center gap-2 flex-col "
->
-@include('my-ui.nav-bar')
-<div class="size-[300px] rounded-full bg-blue-300/40 blur-[130px] absolute -top-20 -left-20"></div>
-<div class="size-[500px] rounded-full bg-indigo-300/30  blur-[130px] absolute -top-20 -left-10"></div>
-<div class="w-[500px] h-56 rounded-full bg-amber-300/10  blur-[130px] absolute top-0 "></div>
-<script async src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+<body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
+    @include('my-ui.nav-bar')
+
+    <div class="flex flex-col h-[50rem] overflow-hidden  w-full gap-5  z-20 ">
+    <div class="flex flex-col gap-3  justify-start items-start">
+       
+    </div>
+    </div>
+    @livewireScripts
 </body>
+
 </html>

@@ -20,6 +20,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // use the --header-font-family css variable to change the font family of the header
+                header: 'var(--header-font)',
             },
             colors : {
                 primary: {
