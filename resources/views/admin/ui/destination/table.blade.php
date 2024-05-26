@@ -24,28 +24,33 @@
                     <label for="hs-table-search-checkbox-all" class="sr-only">Checkbox</label>
                   </div>
                 </th>
-                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">User</th>
                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Trip</th>
+                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Destination</th>
+                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Image</th>
                 <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Action</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-              @foreach ($bookings as $booking)
+              @foreach ($destinationImages as $destinationImage)
               <tr>
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
-                    <input id="hs-table-search-checkbox-{{ $booking->id }}" type="checkbox" class="border-gray-200 rounded text-primary-600 focus:ring-primary-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:focus:ring-offset-gray-800">
-                    <label for="hs-table-search-checkbox-{{ $booking->id }}" class="sr-only">Checkbox</label>
+                    <input id="hs-table-search-checkbox-{{ $destinationImage->id }}" type="checkbox" class="border-gray-200 rounded text-primary-600 focus:ring-primary-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:focus:ring-offset-gray-800">
+                    <label for="hs-table-search-checkbox-{{ $destinationImage->id }}" class="sr-only">Checkbox</label>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $booking->user->name }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $booking->trip->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $destinationImage->trip->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $destinationImage->destination }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                  <img src="{{ asset('storage/' . $destinationImage->image) }}" alt="{{ $destinationImage->destination }}" class="w-20 h-20 object-cover rounded-lg">
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                  <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="inline">
+                  <form action="{{ route('admin.destination-images.destroy', $destinationImage->id) }}" method="POST" class="inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400">Delete</button>
                   </form>
+                  <a href="{{ route('admin.destination-images.show', $destinationImage->id) }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-primary-600 hover:text-primary-800 disabled:opacity-50 disabled:pointer-events-none dark:text-primary-500 dark:hover:text-primary-400">Show</a>
                 </td>
               </tr>
               @endforeach
@@ -55,9 +60,9 @@
       </div>
     </div>
   </div>
-  @if ($bookings->hasPages())
+  @if ($destinationImages->hasPages())
   <div class="pt-3 px-4">
-    {{ $bookings->links() }}
-  </div>  
+    {{ $destinationImages->links() }}
+  </div>
   @endif
 </div>

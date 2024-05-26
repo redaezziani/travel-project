@@ -9,5 +9,12 @@ class DestinationImage extends Model
     protected $fillable = [
         'destination',
         'image',
+        'trip_id',
     ];
+
+    public function trip()
+    {
+        return $this->belongsTo(Trip::class);
+    }
+    
 }

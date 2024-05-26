@@ -14,10 +14,10 @@
 
 <body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
     @include('my-ui.nav-bar')
-    <div class="w-full flex max-w-7xl px-4 md:px-16 mt-32  justify-end items-center relative z-50">
+    <div class="w-full flex max-w-7xl px-4 md:px-16 mt-36  justify-end items-center relative z-50">
         @include('admin.ui.trips.create-trip-form')
     </div>
-    <div class="flex flex-col px-4 md:px-16  w-full gap-5 max-w-7xl z-20 ">
+    <div class="flex flex-col px-4 md:px-16 mt-2  w-full gap-5 max-w-7xl z-20 ">
 
         <div class="flex gap-2 justify-start items-start flex-col">
             <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">

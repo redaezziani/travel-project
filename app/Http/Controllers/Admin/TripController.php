@@ -40,6 +40,9 @@ class TripController extends Controller
             'destination' => 'required',
             'category' => 'required',
             'is_featured' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'is_started' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -70,6 +73,9 @@ class TripController extends Controller
             'destination' => 'required',
             'category' => 'required',
             'is_featured' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'is_started' => 'required',
         ]);
 
         if ($request->hasFile('image')) {

@@ -1,5 +1,43 @@
 import ApexCharts from 'apexcharts'
 
+/*
+[{"id":1,"name":"Exotic Beach Getaway","description":"Escape to a tropical paradise with pristine beaches and crystal-clear waters.","price":"1500.00","seats":20,"supervisor":"John Doe","image":"trips\/beach-getaway.jpg","destination":"Maldives","category":"Beach","is_featured":1,"is_started":0,"start_date":"2023-07-01","end_date":"2023-07-08","created_at":"2024-05-26T19:04:15.000000Z","updated_at":"2024-05-26T19:04:15.000000Z"}]
+*/
+const fetchTrips = async () => {
+    try {
+        const response = await fetch('/api/trips');
+        const data = await response.json();
+         
+
+        // get the total amount of trips for each date
+
+        const trips = data.reduce((acc, trip) => {
+
+            const date = new Date(trip.start_date);
+            const key = `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+            if (acc[key]) {
+
+                acc[key].total += 1;
+            } else {
+                acc[key] = {
+                    total: 1,
+                    date: key
+                };
+            }
+            return acc;
+        }, {});
+
+        return Object.values(trips);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
+
+
+
 var TripsOptions = {
     chart: {
         height: 300,
@@ -13,13 +51,11 @@ var TripsOptions = {
       },
       series: [
         {
-          name: 'Income',
-          data: [18000, 51000, 60000, 38000, 88000, 50000, 40000, 52000, 88000, 80000, 60000, 70000]
-        },
-        {
-          name: 'Outcome',
-          data: [27000, 38000, 60000, 77000, 40000, 50000, 49000, 29000, 42000, 27000, 42000, 50000]
+          name: 'Trips',
+          data: []
         }
+
+        
       ],
       legend: {
         show: false
@@ -29,7 +65,8 @@ var TripsOptions = {
       },
       stroke: {
         curve: 'smooth',
-        width: 2
+        width: 2,
+        colors: ['#0ea5e9']
       },
       grid: {
         strokeDashArray: 2
@@ -165,13 +202,22 @@ var TripsOptions = {
           },
         },
       }]
-    }
-
-    
+}
 
 
-var Tripschart = new ApexCharts(document.querySelector('#trips'), TripsOptions)
-Tripschart.render()
+const intTripsChart = async () => {
+    const trips = await fetchTrips();
+    TripsOptions.series = [{
+        name: 'Trips',
+        data: trips.map((trip) => trip.total)
+    }];
+    var Tripschart = new ApexCharts(document.querySelector('#trips'), TripsOptions)
+    Tripschart.render()
+}
+
+
+
+await intTripsChart();  
 
 
 var UsersOptions = {
@@ -186,7 +232,18 @@ var UsersOptions = {
       plotOptions: {
         bar: {
           columnWidth: '45%',
-          endingShape: 'rounded'
+          endingShape: 'rounded',
+          colors: {
+            ranges: [{
+              from: -100,
+              to: 0,
+              color: '#f44336'
+            }, {
+              from: 1,
+              to: 100,
+              color: '#0ea5e9'
+            }]
+          },
         }
       },
       dataLabels: {

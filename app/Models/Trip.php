@@ -16,6 +16,9 @@ class Trip extends Model
         'destination',
         'category',
         'is_featured',
+        'is_started',
+        'start_date',
+        'end_date',
     ];
 
     public function bookings()

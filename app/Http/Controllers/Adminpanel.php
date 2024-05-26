@@ -17,8 +17,8 @@ class Adminpanel extends Controller
         $trips = Trip::all();
         $bookings = Booking::paginate(5);
         $users = User::all();
-        $comments = Comment::all();
-        $likes = Like::all();
+        $comments = Comment::paginate(5);
+        $likes = Like::paginate(5);
 
 
         return view('admin.dashboard', compact('trips', 'bookings', 'users', 'comments', 'likes'));

@@ -26,22 +26,24 @@
                 </th>
                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">User</th>
                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Trip</th>
+                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Comment</th>
                 <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Action</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-              @foreach ($bookings as $booking)
+              @foreach ($comments as $comment)
               <tr>
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
-                    <input id="hs-table-search-checkbox-{{ $booking->id }}" type="checkbox" class="border-gray-200 rounded text-primary-600 focus:ring-primary-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:focus:ring-offset-gray-800">
-                    <label for="hs-table-search-checkbox-{{ $booking->id }}" class="sr-only">Checkbox</label>
+                    <input id="hs-table-search-checkbox-{{ $comment->id }}" type="checkbox" class="border-gray-200 rounded text-primary-600 focus:ring-primary-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:focus:ring-offset-gray-800">
+                    <label for="hs-table-search-checkbox-{{ $comment->id }}" class="sr-only">Checkbox</label>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $booking->user->name }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $booking->trip->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $comment->user->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $comment->trip->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $comment->comment }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                  <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="inline">
+                  <form action="{{ route('admin.comments.destroy', $comment->id) }}" method="POST" class="inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400">Delete</button>
@@ -55,9 +57,9 @@
       </div>
     </div>
   </div>
-  @if ($bookings->hasPages())
+  @if ($comments->hasPages())
   <div class="pt-3 px-4">
-    {{ $bookings->links() }}
-  </div>  
+    {{ $comments->links() }}
+  </div>
   @endif
 </div>

@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.css" rel="stylesheet">
     <title>Atlas Escapes admin Dashboard</title>
 </head>
-
 <body class="flex w-full bg-white dark:bg-neutral-900 overflow-x-hidden relative justify-center items-center gap-2 flex-col">
     @include('my-ui.nav-bar')
 
@@ -24,20 +22,19 @@
                 here you can see all the trips in the system and manage them as you like
             </p>
         </div>
-
         <div class="w-full mt-5 grid grid-cols-1 md:grid-cols-2 gap-3 ">
-
-
             <div class="border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70" id="trips"></div>
             <div class="border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70" id="users"></div>
-            <div class=" min-h-96 col-span-1 md:col-span-2 shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+            
+            <div class=" max-h-96 col-span-1 md:col-span-2 shadow-sm rounded-xl pointer-events-auto  ">
                 @include('admin.ui.bookings.table')
+            </div>
+            <div class="max-h-96 col-span-1 md:col-span-2 shadow-sm rounded-xl pointer-events-auto  ">
+            @include('admin.ui.comments.table')
             </div>
         </div>
     </div>
-
     @vite('resources/js/dashbaord.js')
     @livewireScripts
 </body>
-
 </html>
