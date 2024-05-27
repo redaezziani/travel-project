@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\DestinationImageController;
 use App\Http\Controllers\Admin\LikeController;
 use App\Http\Controllers\Admin\TripController;
 use App\Http\Controllers\Adminpanel as ControllersAdminpanel;
-use App\Http\Controllers\Users\ControllersCommentUsers;
+use App\Http\Controllers\AllUsersController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -63,4 +64,7 @@ Route::prefix('dashboard/admin/destination-images')->name('admin.destination-ima
     Route::delete('/{destinationImage}', [DestinationImageController::class, 'destroy'])->name('destroy');
 })->middleware('check.user.role:admin');
 
+Route::prefix('dashboard/admin/users')->name('admin.users.')->group(function () {
+    Route::get('/', [AllUsersController::class, 'index'])->name('index');
 
+})->middleware('check.user.role:admin');

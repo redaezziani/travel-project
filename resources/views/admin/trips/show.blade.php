@@ -90,6 +90,24 @@
                     </p>
                 </div>
 
+                <div class="flex gap-2 justify-start items-start flex-col">
+                    <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
+                        trip status
+                    </h1>
+                    <p class=" text-xs text-gray-500 dark:text-neutral-400">
+                      {{ $trip->is_started ? 'Started' : 'Not started' }}
+                    </p>
+                </div>
+                <div class="flex gap-2 justify-start items-start flex-col">
+                    <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
+                        availeble seats
+                    </h1>
+                    <p class=" text-xs text-gray-500 dark:text-neutral-400">
+
+                      {{ $trip->seats - $trip->bookings->count() }}
+                    </p>
+                </div>
+
                 <div class=" flex w-full gap-2 justify-start items-start md:mt-16">
                     <button type="button" class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-100 bg-white text-gray-800 shadow-sm hover:bg-red-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-red-500 dark:hover:bg-red-600/25">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-red-500">
@@ -112,84 +130,27 @@
         <!--Sug section-->
         <div class="flex mt-6 pb-3 gap-2 justify-start items-start flex-col">
             <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
-                Suggestions
+                Desination images for this trip
             </h1>
-            <div class="w-full grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-5">
+            <div class="w-full grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+                @foreach ($trip->destination_images as $destinationImage)
                 <div class="w-full flex flex-col gap-2 justify-start items-start">
-                    <div class="w-full relative overflow-hidden rounded-lg aspect-square">
-                        <img src="https://source.unsplash.com/1600x900/?nature,water" alt="nature" class="object-cover w-full h-full">
+                    <div class="w-full relative overflow-hidden rounded-lg aspect-video">
+                        <img
+                        src="{{ asset('storage/' . $destinationImage->image) }}"
+                        alt="nature" class="object-cover w-full h-full">
                     </div>
                     <div class="flex gap-2 justify-start items-start flex-col">
                         <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
-                            trip name
+                            {{ $destinationImage->destination }}
                         </h1>
-                        <p class=" text-xs text-gray-500 dark:text-neutral-400">
-                            trip description
-                        </p>
-                        <p>
-                            <span class="text-xs font-semibold text-gray-800 dark:text-neutral-200">
-                                12
-                            </span>
-                            <span class="text-xs text-gray-500 dark:text-neutral-400">
-                                seats
-                            </span>
-                        </p>
-                        <p>
-                            <span class="text-xs font-semibold text-gray-800 dark:text-neutral-200">
-                                1200
-                            </span>
-                            <span class="text-xs text-gray-500 dark:text-neutral-400">
-                                DH
-                            </span>
-                        </p>
+                       
                     </div>
                     
                 </div>
+                @endforeach
 
-                <div class="w-full flex flex-col gap-2 justify-start items-start">
-                    <div class="w-full relative overflow-hidden rounded-lg aspect-square">
-                        <img src="https://source.unsplash.com/1600x900/?nature,water" alt="nature" class="object-cover w-full h-full">
-                    </div>
-                    <div class="flex gap-2 justify-start items-start flex-col">
-                        <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
-                            trip name
-                        </h1>
-                        <p class=" text-xs text-gray-500 dark:text-neutral-400">
-                            trip description
-                        </p>
-                    </div>
-                    
-                </div>
-
-                <div class="w-full flex flex-col gap-2 justify-start items-start">
-                    <div class="w-full relative overflow-hidden rounded-lg aspect-square">
-                        <img src="https://source.unsplash.com/1600x900/?nature,water" alt="nature" class="object-cover w-full h-full">
-                    </div>
-                    <div class="flex gap-2 justify-start items-start flex-col">
-                        <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
-                            trip name
-                        </h1>
-                        <p class=" text-xs text-gray-500 dark:text-neutral-400">
-                            trip description
-                        </p>
-                    </div>
-                    
-                </div>
-
-                <div class="w-full flex flex-col gap-2 justify-start items-start">
-                    <div class="w-full relative overflow-hidden rounded-lg aspect-square">
-                        <img src="https://source.unsplash.com/1600x900/?nature,water" alt="nature" class="object-cover w-full h-full">
-                    </div>
-                    <div class="flex gap-2 justify-start items-start flex-col">
-                        <h1 class=" text-sm font-semibold text-gray-800 dark:text-neutral-200 capitalize">
-                            trip name
-                        </h1>
-                        <p class=" text-xs text-gray-500 dark:text-neutral-400">
-                            trip description
-                        </p>
-                    </div>
-                    
-                </div>
+                
             </div>
         </div>
     </div>

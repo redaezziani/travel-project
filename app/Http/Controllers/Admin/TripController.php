@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
+use App\Models\DestinationImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,6 +26,8 @@ class TripController extends Controller
         $trip->comments = $trip->comments()->with('user')->latest()->paginate(5);
         $trip->likes = $trip->likes()->with('user')->latest()->paginate(5);
         $trip->likes_count = $trip->likes->where('like', 1)->count(); 
+      // lets get the destination images that are related to the trip
+        $trip->destination_images = DestinationImage::where('trip_id', $trip->id)->get();
         return view('admin.trips.show', compact('trip'));
     }
 

@@ -15,7 +15,7 @@
 <body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
     @include('my-ui.nav-bar')
     <div class="w-full flex max-w-7xl px-4 md:px-16 mt-36  justify-end items-center relative z-50">
-        @include('admin.ui.bookings.create-booking-form')
+        @livewire('create-booking')
     </div>
     <div class="flex flex-col  mt-2 px-4 md:px-16  w-full gap-5 max-w-7xl z-20 ">
 
@@ -27,11 +27,9 @@
                 here you can see all the bookings in the system and manage them as you like
             </p>
         </div>
-        
-        
-        @include('admin.ui.bookings.table')
-        
-        
+        <div class=" max-h-96 relative col-span-1 md:col-span-2 shadow-sm rounded-xl pointer-events-auto  ">
+                @livewire('booking-table')
+        </div>
     </div>
     @livewireScripts
 </body>

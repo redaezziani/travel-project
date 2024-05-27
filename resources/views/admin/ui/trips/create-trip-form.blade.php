@@ -138,6 +138,7 @@
                     <label for="end_date" class="block text-sm text-slate-700 font-medium mb-2 dark:text-white">
                         End Date
                     </label>
+                    
                     <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     @error('end_date')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -175,3 +176,139 @@
         </div>
     </div>
 </div>
+
+<script
+src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"
+>
+
+</script>
+<script
+>
+    document.addEventListener('DOMContentLoaded', function() {
+  const monthSelect = document.getElementById('month-select');
+  const yearSelect = document.getElementById('year-select');
+  const daysGrid = document.getElementById('days-grid');
+
+  function populateMonthAndYearSelectors() {
+    for (let i = 0; i < 12; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = dayjs().month(i).format('MMMM');
+      monthSelect.appendChild(option);
+    }
+
+    const year = dayjs().year();
+    for (let i = year - 10; i <= year + 10; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      yearSelect.appendChild(option);
+    }
+
+    monthSelect.value = dayjs().month();
+    yearSelect.value = year;
+  }
+
+  function updateCalendar() {
+    const month = monthSelect.value;
+    const year = yearSelect.value;
+    const daysInMonth = dayjs(new Date(year, month)).daysInMonth();
+    const firstDayOfMonth = dayjs(new Date(year, month)).day();
+
+    daysGrid.innerHTML = '';
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      daysGrid.appendChild(document.createElement('div')); // Empty cells
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayCell = document.createElement('button');
+      dayCell.textContent = day;
+      daysGrid.appendChild(dayCell);
+    }
+  }
+
+  function changeMonth(change) {
+    let month = parseInt(monthSelect.value) + change;
+    let year = parseInt(yearSelect.value);
+
+    if (month < 0) {
+      month = 11;
+      year--;
+    } else if (month > 11) {
+      month = 0;
+      year++;
+    }
+
+    monthSelect.value = month;
+    yearSelect.value = year;
+    updateCalendar();
+  }
+
+  populateMonthAndYearSelectors();
+  updateCalendar();
+});
+document.addEventListener('DOMContentLoaded', function() {
+  const monthSelect = document.getElementById('month-select');
+  const yearSelect = document.getElementById('year-select');
+  const daysGrid = document.getElementById('days-grid');
+
+  function populateMonthAndYearSelectors() {
+    for (let i = 0; i < 12; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = dayjs().month(i).format('MMMM');
+      monthSelect.appendChild(option);
+    }
+
+    const year = dayjs().year();
+    for (let i = year - 10; i <= year + 10; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      yearSelect.appendChild(option);
+    }
+
+    monthSelect.value = dayjs().month();
+    yearSelect.value = year;
+  }
+
+  function updateCalendar() {
+    const month = monthSelect.value;
+    const year = yearSelect.value;
+    const daysInMonth = dayjs(new Date(year, month)).daysInMonth();
+    const firstDayOfMonth = dayjs(new Date(year, month)).day();
+
+    daysGrid.innerHTML = '';
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      daysGrid.appendChild(document.createElement('div')); // Empty cells
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayCell = document.createElement('button');
+      dayCell.textContent = day;
+      daysGrid.appendChild(dayCell);
+    }
+  }
+
+  function changeMonth(change) {
+    let month = parseInt(monthSelect.value) + change;
+    let year = parseInt(yearSelect.value);
+
+    if (month < 0) {
+      month = 11;
+      year--;
+    } else if (month > 11) {
+      month = 0;
+      year++;
+    }
+
+    monthSelect.value = month;
+    yearSelect.value = year;
+    updateCalendar();
+  }
+
+  populateMonthAndYearSelectors();
+  updateCalendar();
+});
+
+</script>
