@@ -41,7 +41,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $comment->user->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $comment->trip->name }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $comment->comment }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $comment->content }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                   <form action="{{ route('admin.comments.destroy', $comment->id) }}" method="POST" class="inline">
                     @csrf
