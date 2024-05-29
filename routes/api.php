@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // lets make a route for the trips to fetch using js  funtion that use the model
 Route::get('/trips', function () {
-    $trips = Trip::all();
+    $trips = Trip::with('bookings')->get();
     return response()->json($trips);
 });

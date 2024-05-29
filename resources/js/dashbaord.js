@@ -1,47 +1,39 @@
 import ApexCharts from 'apexcharts'
 
-/*
-[{"id":1,"name":"Exotic Beach Getaway","description":"Escape to a tropical paradise with pristine beaches and crystal-clear waters.","price":"1500.00","seats":20,"supervisor":"John Doe","image":"trips\/beach-getaway.jpg","destination":"Maldives","category":"Beach","is_featured":1,"is_started":0,"start_date":"2023-07-01","end_date":"2023-07-08","created_at":"2024-05-26T19:04:15.000000Z","updated_at":"2024-05-26T19:04:15.000000Z"}]
-*/
 const fetchTrips = async () => {
     try {
         const response = await fetch('/api/trips');
         const data = await response.json();
          
-
-        // get the total amount of trips for each date
-
-        const trips = data.reduce((acc, trip) => {
-
-            const date = new Date(trip.start_date);
-            const key = `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
-            if (acc[key]) {
-
-                acc[key].total += 1;
-            } else {
-                acc[key] = {
-                    total: 1,
-                    date: key
-                };
-            }
+        // Get the count of bookings for each day and each trip
+        const bookingCounts = data.reduce((acc, trip) => {
+            trip.bookings.forEach(booking => {
+                const date = new Date(booking.created_at).toISOString().split('T')[0];
+                if (!acc[trip.id]) {
+                    acc[trip.id] = { name: `Trip ${trip.id}`, data: [] };
+                }
+                const existingData = acc[trip.id].data.find(d => d.x === date);
+                if (existingData) {
+                    existingData.y++;
+                } else {
+                    acc[trip.id].data.push({ x: date, y: 1 });
+                }
+            });
             return acc;
         }, {});
 
-        return Object.values(trips);
+        // Convert the booking counts to an array of series
+        return Object.values(bookingCounts);
+        
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-
-
-
-
-
 var TripsOptions = {
     chart: {
         height: 300,
-        type: 'area',
+        type: 'line',
         toolbar: {
           show: false
         },
@@ -49,125 +41,28 @@ var TripsOptions = {
           enabled: false
         }
       },
-      series: [
-        {
-          name: 'Trips',
-          data: []
-        }
-
-        
-      ],
-      legend: {
-        show: false
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2,
-        colors: ['#0ea5e9']
-      },
-      grid: {
-        strokeDashArray: 2
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          type: 'vertical',
-          shadeIntensity: 1,
-          opacityFrom: 0.1,
-          opacityTo: 0.8
-        }
-      },
+      series: [],
       xaxis: {
-        type: 'category',
+        type: 'datetime',
         tickPlacement: 'on',
-        categories: [
-          '25 January 2023',
-          '26 January 2023',
-          '27 January 2023',
-          '28 January 2023',
-          '29 January 2023',
-          '30 January 2023',
-          '31 January 2023',
-          '1 February 2023',
-          '2 February 2023',
-          '3 February 2023',
-          '4 February 2023',
-          '5 February 2023'
-        ],
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        crosshairs: {
-          stroke: {
-            dashArray: 0
-          },
-          dropShadow: {
-            show: false
-          }
-        },
-        tooltip: {
-          enabled: false
-        },
         labels: {
           style: {
             colors: '#9ca3af',
             fontSize: '13px',
-            fontFamily: 'Inter, ui-sans-serif',
             fontWeight: 400
           },
-          formatter: (title) => {
-            let t = title;
-
-            if (t) {
-              const newT = t.split(' ');
-              t = `${newT[0]} ${newT[1].slice(0, 3)}`;
-            }
-
-            return t;
-          }
         }
       },
       yaxis: {
         labels: {
           align: 'left',
           minWidth: 0,
-          maxWidth: 140,
+          maxWidth: 160,
           style: {
             colors: '#9ca3af',
             fontSize: '13px',
-            fontFamily: 'Inter, ui-sans-serif',
             fontWeight: 400
           },
-          formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
-        }
-      },
-      tooltip: {
-        x: {
-          format: 'MMMM yyyy'
-        },
-        y: {
-          formatter: (value) => `$${value >= 1000 ? `${value / 1000}k` : value}`
-        },
-        custom: function (props) {
-          const { categories } = props.ctx.opts.xaxis;
-          const { dataPointIndex } = props;
-          const title = categories[dataPointIndex].split(' ');
-          const newTitle = `${title[0]} ${title[1]}`;
-
-          return buildTooltip(props, {
-            title: newTitle,
-            mode,
-            hasTextLabel: true,
-            wrapperExtClasses: 'min-w-28',
-            labelDivider: ':',
-            labelExtClasses: 'ms-2'
-          });
         }
       },
       responsive: [{
@@ -176,48 +71,39 @@ var TripsOptions = {
           chart: {
             height: 300
           },
-          labels: {
-            style: {
-              colors: '#9ca3af',
-              fontSize: '11px',
-              fontFamily: 'Inter, ui-sans-serif',
-              fontWeight: 400
-            },
-            offsetX: -2,
-            formatter: (title) => title.slice(0, 3)
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '11px',
+              },
+            }  
           },
           yaxis: {
             labels: {
-              align: 'left',
-              minWidth: 0,
-              maxWidth: 140,
               style: {
-                colors: '#9ca3af',
                 fontSize: '11px',
-                fontFamily: 'Inter, ui-sans-serif',
-                fontWeight: 400
               },
-              formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
             }
           },
         },
       }]
 }
 
-
 const intTripsChart = async () => {
-    const trips = await fetchTrips();
-    TripsOptions.series = [{
-        name: 'Trips',
-        data: trips.map((trip) => trip.total)
-    }];
+    const bookingCounts = await fetchTrips();
+    
+    TripsOptions.series = bookingCounts;
+    // line stroke width
+    TripsOptions.stroke = {
+        curve: 'smooth',
+        width: 1.5
+    }
     var Tripschart = new ApexCharts(document.querySelector('#trips'), TripsOptions)
     Tripschart.render()
 }
 
+await intTripsChart();
 
-
-await intTripsChart();  
 
 
 var UsersOptions = {
