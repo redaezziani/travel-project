@@ -10,10 +10,11 @@ use App\Http\Controllers\AllUsersController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
+// use the trips controller to send to the welcome view the trips
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\Trips;
+
+Route::get('/', [Trips::class, 'index'])->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
