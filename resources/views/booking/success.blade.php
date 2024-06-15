@@ -16,7 +16,7 @@
     <div class="size-[350px] bg-primary-500/40 blur-[130px] rounded-full absolute -right-10 -top-10">
 
     </div>
-    @include('my-ui.nav-bar')
+    @include('my-ui.user-nav-bar')
     
     <h1
     class="text-4xl mt-96 md:text-2xl font-bold text-green-500 "

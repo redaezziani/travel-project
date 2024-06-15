@@ -13,9 +13,8 @@
 </head>
 
 <body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
-    @include('my-ui.nav-bar')
+    @include('my-ui.user-nav-bar')
     @livewire('trips-search')
-   
     @livewireScripts
 
 </body>

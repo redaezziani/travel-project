@@ -16,7 +16,7 @@
     <div class="size-[350px] bg-primary-500/40 blur-[130px] rounded-full absolute -right-10 -top-10">
 
     </div>
-    @include('my-ui.nav-bar')
+    @include('my-ui.user-nav-bar')
     <div class="w-full flex flex-col md:flex-row max-w-7xl px-4 md:px-16 mt-36  justify-start items-center relative z-30">
         <div class="md:w-1/2 flex flex-col gap-3 justify-start items-start">
             <h1 class="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100">
