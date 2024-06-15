@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Trips;
 
 Route::get('/', [Trips::class, 'index'])->name('welcome');
+Route::get('/filter', [Trips::class, 'filter'])->name('filter');
+Route::get('/trip/{id}', [Trips::class, 'show'])->name('trip');
+
+Route::post('/stripe/checkout', [StripeController::class, 'checkout'])->name('stripe.checkout');
+Route::get('/stripe/success', [StripeController::class, 'success'])->name('booking.success');
+Route::get('/stripe/cancel', [StripeController::class, 'cancel'])->name('booking.cancel');
 
 Route::middleware([
     'auth:sanctum',

@@ -13,8 +13,11 @@
 </head>
 
 <body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
+    <div class="size-[350px] bg-primary-500/40 blur-[130px] rounded-full absolute -right-10 -top-10">
+
+    </div>
     @include('my-ui.nav-bar')
-    <div class="w-full flex flex-col md:flex-row max-w-7xl px-4 md:px-16 mt-36  justify-start items-center relative z-50">
+    <div class="w-full flex flex-col md:flex-row max-w-7xl px-4 md:px-16 mt-36  justify-start items-center relative z-30">
         <div class="md:w-1/2 flex flex-col gap-3 justify-start items-start">
             <h1 class="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100">
                 Let's embark on an unforgettable journey together
@@ -24,7 +27,7 @@
 
             </h1>
             <p class=" text-sm text-slate-500 dark:text-neutral-300  md:text-lg">
-                From breathtaking landscapes to vibrant cultures, our travel experts will help you plan the perfect getaway. Whether you're seeking relaxation, adventure, or immersive experiences,
+                From breathtaking landscapes to vibrant cultures, our travel experts will help you plan the perfect getaway. Whether you're seeking relaxation, adventure.
             </p>
             <div class="flex gap-4 mt-4">
                 <a href="#" class="bg-primary-500 text-sm text-white px-4 py-2.5 rounded-md">
@@ -45,16 +48,26 @@
     </div>
     </div>
     @include('my-ui.agency-slider')
-    <div class="w-full flex flex-col  max-w-7xl px-4 md:px-16 mt-10  justify-start items-center relative z-50">
-        <h1
-        class="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100"
-        >
-            list of trips here
-        </h1>
-        
+    <div class="w-full flex flex-col  max-w-7xl px-4 md:px-14 mt-10  justify-start items-center relative z-50">
+
+        <div class="w-full justify-between items-center gap-2 flex">
+            <h1 class="  text-neutral-700 font-medium dark:text-neutral-100">
+              Explore Our Trips 
+            </h1>
+            <a href="{{ route('filter') }}" class="flex gap-1 items-center justify-center text-sm text-slate-500 hover:text-slate-500/95">
+                <span>
+                    View All
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <path d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15 17C15 17 20 13.3176 20 12C20 10.6824 15 7 15 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+       @livewire('bento-grid')
     </div>
     @livewireScripts
-   
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-<header class=" fixed top-0 z-50 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-4 dark:bg-neutral-800">
-    <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-        <div class="flex items-center justify-between">
+<header class=" fixed top-0 z-50 border-b border-neutral-400/15 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-4 dark:bg-neutral-800">
+    <nav class="max-w-[85rem]  w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+        <div class="flex items-center  justify-between">
             <a href="/">
             <svg aria-label="Logo" class="flex-shrink-0 stroke-slate-700  dark:stroke-slate-50 size-8 sm:size-9" width="40" viewBox="0 0 600 500" fill="none">
                 <rect x="379.447" y="43.748" width="172.095" height="418.666" rx="86.0473" strokeWidth="30"></rect>
