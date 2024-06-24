@@ -1,39 +1,52 @@
-import ApexCharts from 'apexcharts'
+import ApexCharts from 'apexcharts';
 
 const fetchTrips = async () => {
     try {
         const response = await fetch('/api/trips');
         const data = await response.json();
-         
-        // Get the count of bookings for each day and each trip
+
+        // Get the current month and year
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+
+        // Get the count of bookings for each day of the current month
         const bookingCounts = data.reduce((acc, trip) => {
             trip.bookings.forEach(booking => {
-                const date = new Date(booking.created_at).toISOString().split('T')[0];
-                if (!acc[trip.id]) {
-                    acc[trip.id] = { name: `Trip ${trip.id}`, data: [] };
-                }
-                const existingData = acc[trip.id].data.find(d => d.x === date);
-                if (existingData) {
-                    existingData.y++;
-                } else {
-                    acc[trip.id].data.push({ x: date, y: 1 });
+                const bookingDate = new Date(booking.created_at);
+                const bookingMonth = bookingDate.getMonth();
+                const bookingYear = bookingDate.getFullYear();
+
+                if (bookingMonth === currentMonth && bookingYear === currentYear) {
+                    const date = bookingDate.toISOString().split('T')[0];
+                    if (!acc[date]) {
+                        acc[date] = 0;
+                    }
+                    acc[date]++;
                 }
             });
             return acc;
         }, {});
 
         // Convert the booking counts to an array of series
-        return Object.values(bookingCounts);
-        
+        const seriesData = Object.keys(bookingCounts).map(date => ({
+            x: date,
+            y: bookingCounts[date]
+        }));
+
+        return [{
+            name: 'Bookings',
+            data: seriesData
+        }];
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-var TripsOptions = {
+const TripsOptions = {
     chart: {
         height: 300,
-        type: 'line',
+        type: 'line', // the type of chart : line, area, bar, pie, donut, radar, polarArea, bubble, scatter
         toolbar: {
           show: false
         },
@@ -89,7 +102,7 @@ var TripsOptions = {
       }]
 }
 
-const intTripsChart = async () => {
+const initTripsChart = async () => {
     const bookingCounts = await fetchTrips();
     
     TripsOptions.series = bookingCounts;
@@ -98,11 +111,12 @@ const intTripsChart = async () => {
         curve: 'smooth',
         width: 1.5
     }
-    var Tripschart = new ApexCharts(document.querySelector('#trips'), TripsOptions)
-    Tripschart.render()
+    var Tripschart = new ApexCharts(document.querySelector('#trips'), TripsOptions);
+    Tripschart.render();
 }
 
-await intTripsChart();
+await initTripsChart();
+
 
 
 

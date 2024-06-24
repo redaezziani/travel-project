@@ -3,7 +3,7 @@
         <h3 class="font-bold text-gray-800 dark:text-white">
             Update trip
         </h3>
-        
+
     </div>
     <div class="p-1 px-4 overflow-y-auto">
         <p class="mt-1 text-gray-600 dark:text-neutral-400">
@@ -31,8 +31,10 @@
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
-        <div class=" w-full">
-            <label for="image" class="block text-sm text-slate-700 font-medium mb-2 dark:text-white">
+        <div class=" w-full flex-col justify-start items-center mt-5 gap-3">
+            <img src="{{ asset('storage/' . $trip->image) }}" alt="{{ $trip->name }}" class="w-full
+             h-32 object-cover rounded-lg ">
+            <label for="image" class="block text-sm text-slate-700  font-medium mb-2 dark:text-white">
                 Image
             </label>
             <label class="block">

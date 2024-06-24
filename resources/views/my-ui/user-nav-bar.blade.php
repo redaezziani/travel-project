@@ -1,15 +1,24 @@
 <header class="fixed top-0 z-50 border-b border-neutral-400/15 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-4 dark:bg-neutral-800">
     <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
         <div class="flex items-center justify-between">
-            <a href="/">
+            <a 
+            class=' flex gap-2 items-center'
+            href="/">
                 <svg aria-label="Logo" class="flex-shrink-0 stroke-slate-700 dark:stroke-slate-50 size-8 sm:size-9" width="40" viewBox="0 0 600 500" fill="none">
                     <rect x="379.447" y="43.748" width="172.095" height="418.666" rx="86.0473" stroke-width="30"></rect>
                     <path d="M231.995 351.6L306.965 221.807L381.934 92.0154C404.822 52.3913 458.092 33.3388 500.917 49.4604C543.742 65.5819 559.905 110.773 537.018 150.397L387.079 409.981C364.191 449.605 310.921 468.657 268.096 452.536C225.271 436.414 209.108 391.224 231.995 351.6Z" stroke-width="30"></path>
                     <path d="M278.239 272.481L278.206 272.539L278.173 272.597L201.072 408.622C180.402 445.088 131.538 462.758 92.2557 447.97C53.2008 433.268 38.461 392.055 59.3333 355.92L216.867 83.187C237.575 47.3364 285.772 30.0984 324.519 44.6849C363.283 59.2777 377.899 100.192 357.157 136.049L278.239 272.481Z" stroke-width="30"></path>
                 </svg>
+                <p
+                class="text-primary font-medium"
+                >
+                    Travels
+                </p>
+                
             </a>
+
             <div class="sm:hidden flex justify-center gap-3 items-center">
-                @include('my-ui.theme')
+              
                 
                 <!-- Mobile Menu Toggle -->
                 <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10" data-hs-collapse="#navbar-with-mega-menu" aria-controls="navbar-with-mega-menu" aria-label="Toggle navigation">
@@ -31,7 +40,6 @@
                 <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="{{ route('welcome') }}">Home</a>
                 <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="{{ route('filter') }}">All Trips</a>
 
-                @include('my-ui.theme')
                 <!-- Authentication Links -->
                 @auth
                 <div class="flex items-center space-x-4">

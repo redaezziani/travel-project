@@ -39,7 +39,7 @@ class TripController extends Controller
             'price' => 'required',
             'seats' => 'required',
             'supervisor' => 'required',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5120', // 5MB max
             'destination' => 'required',
             'category' => 'required',
             'is_featured' => 'required',
@@ -72,7 +72,7 @@ class TripController extends Controller
             'price' => 'required',
             'seats' => 'required',
             'supervisor' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'image|max:5120',
             'destination' => 'required',
             'category' => 'required',
             'is_featured' => 'required',
