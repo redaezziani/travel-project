@@ -35,10 +35,13 @@
                 <strong>{{ $comment->user->name }}:</strong> {{ $comment->content }}
                 <p class="text-gray-500 text-xs mt-1">Trip: {{ $comment->trip->name }}</p>
             </div>
+            {{-- Delete button if the user is logdin   --}}
+            @if(Auth::check())
             @if(Auth::user()->role === 'admin' || $comment->user_id === Auth::id())
             <button wire:click="deleteComment({{ $comment->id }})" class="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                 Delete
             </button>
+            @endif
             @endif
         </li>
         @endforeach

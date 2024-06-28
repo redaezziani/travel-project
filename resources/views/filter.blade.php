@@ -15,6 +15,7 @@
 <body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
     @include('my-ui.user-nav-bar')
     @livewire('trips-search')
+    @include('my-ui.footer')
     @livewireScripts
 
 </body>

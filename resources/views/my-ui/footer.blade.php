@@ -1,5 +1,5 @@
 <!-- ========== FOOTER ========== -->
-<footer class=" w-full mt-28 border-t max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+<footer class=" w-full mt-3 md:mt-28 border-t max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
   <!-- Grid -->
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
     <div class="col-span-full hidden lg:col-span-1 lg:block">

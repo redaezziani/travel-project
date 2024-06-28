@@ -1,4 +1,4 @@
-<div class="w-full grid min-h-[20rem]  mt-6 py-3 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2">
+<div class="w-full grid min-h-[20rem] z-10 relative  mt-6 py-3 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2">
     <div class="w-full flex relative justify-start items-end col-span-2 max-h-96 aspect-square overflow-hidden h-auto rounded-lg border border-slate-400/25">
         <img class="w-full z-0 absolute  h-auto object-cover" src="{{ asset('storage/' . $lastTrip->image) }}" alt="" srcset="">
         <div class="w-full z-10 h-full bg-gradient-to-b from-neutral-900/0 to-neutral-900 flex flex-col gap-2 justify-end items-start p-4">

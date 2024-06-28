@@ -22,11 +22,13 @@ class StripeController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'MAD',
                     'product_data' => [
                         'name' => $trip->name,
+                        'images' => [$trip->image],
+                        'description' => $trip->description,
                     ],
-                    'unit_amount' => 2000,
+                    'unit_amount' => $trip->price * 100,
                 ],
                 'quantity' => 1,
             ]],
@@ -48,7 +50,7 @@ class StripeController extends Controller
                 '&user_id='
                 .
                 $userId,
-            'cancel_url' => route('booking.cancel'),
+            'cancel_url' => route('welcome'),
         ]);
 
         return redirect()->away($session->url);

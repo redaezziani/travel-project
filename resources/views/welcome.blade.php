@@ -12,10 +12,8 @@
     </title>
 </head>
 
-<body class=" flex  w-full  bg-white dark:bg-neutral-900  overflow-x-hidden relative justify-center items-center gap-2 flex-col ">
-    <div class="size-[350px] bg-primary-500/40 blur-[130px] rounded-full absolute -right-10 -top-10">
-
-    </div>
+<body class=" flex overflow-x-hidden  w-full  bg-white dark:bg-neutral-900   relative justify-center items-center gap-2 flex-col ">
+    
     @include('my-ui.user-nav-bar')
     <div class="w-full flex flex-col md:flex-row max-w-7xl px-4 md:px-16 mt-36  justify-start items-center relative z-30">
         <div class="md:w-1/2 flex flex-col gap-3 justify-start items-start">
@@ -48,7 +46,7 @@
     </div>
     </div>
     @include('my-ui.agency-slider')
-    <div class="w-full flex flex-col  max-w-7xl px-4 md:px-14 mt-10  justify-start items-center relative z-50">
+    <div class="w-full flex flex-col  max-w-7xl px-4 md:px-14 mt-10  justify-start items-center relative z-40">
 
         <div class="w-full justify-between items-center gap-2 flex">
             <h1 class="  text-neutral-700 font-medium dark:text-neutral-100">
@@ -66,6 +64,7 @@
         </div>
        @livewire('bento-grid')
     </div>
+    @include('my-ui.footer')
     @livewireScripts
 
 </body>
